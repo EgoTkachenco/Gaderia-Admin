@@ -18,10 +18,21 @@ interface Company {
 
 export const CompaniesDropdown = () => {
   const [company, setCompany] = useState<Company>({
-    name: "Acme Co.",
-    location: "Palo Alto, CA",
+    name: "Gaderia",
+    location: "Kyiv, UA",
     logo: <AcmeIcon />,
   });
+	// return <div className="flex items-center gap-2">
+	// {company.logo}
+	// <div className="flex flex-col gap-4">
+	// 	<h3 className="text-xl font-medium m-0 text-default-900 -mb-4 whitespace-nowrap">
+	// 		{company.name}
+	// 	</h3>
+	// 	<span className="text-xs font-medium text-default-500">
+	// 		{company.location}
+	// 	</span>
+	// </div>
+	// </div>
   return (
     <Dropdown
       classNames={{

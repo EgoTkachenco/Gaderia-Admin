@@ -1,12 +1,12 @@
-import { Input, Link, Navbar, NavbarContent } from "@nextui-org/react";
-import React from "react";
-import { FeedbackIcon } from "../icons/navbar/feedback-icon";
-import { GithubIcon } from "../icons/navbar/github-icon";
-import { SupportIcon } from "../icons/navbar/support-icon";
-import { SearchIcon } from "../icons/searchicon";
-import { BurguerButton } from "./burguer-button";
-import { NotificationsDropdown } from "./notifications-dropdown";
-import { UserDropdown } from "./user-dropdown";
+import { Input, Link, Navbar, NavbarContent } from '@nextui-org/react';
+import React from 'react';
+import { FeedbackIcon } from '../icons/navbar/feedback-icon';
+import { GithubIcon } from '../icons/navbar/github-icon';
+import { SupportIcon } from '../icons/navbar/support-icon';
+import { SearchIcon } from '../icons/searchicon';
+import { BurguerButton } from './burguer-button';
+import { NotificationsDropdown } from './notifications-dropdown';
+import { UserDropdown } from './user-dropdown';
 
 interface Props {
   children: React.ReactNode;
@@ -19,7 +19,7 @@ export const NavbarWrapper = ({ children }: Props) => {
         isBordered
         className="w-full"
         classNames={{
-          wrapper: "w-full max-w-full",
+          wrapper: 'w-full max-w-full',
         }}
       >
         <NavbarContent className="md:hidden">
@@ -29,10 +29,10 @@ export const NavbarWrapper = ({ children }: Props) => {
           <Input
             startContent={<SearchIcon />}
             isClearable
-            className="w-full"
+            className="w-2/4"
             classNames={{
-              input: "w-full",
-              mainWrapper: "w-full",
+              input: 'w-full',
+              mainWrapper: 'w-full',
             }}
             placeholder="Search..."
           />
@@ -41,7 +41,7 @@ export const NavbarWrapper = ({ children }: Props) => {
           justify="end"
           className="w-fit data-[justify=end]:flex-grow-0"
         >
-          <div className="flex items-center gap-2 max-md:hidden">
+          {/* <div className="flex items-center gap-2 max-md:hidden">
             <FeedbackIcon />
             <span>Feedback?</span>
           </div>
@@ -57,7 +57,7 @@ export const NavbarWrapper = ({ children }: Props) => {
             target={"_blank"}
           >
             <GithubIcon />
-          </Link>
+          </Link> */}
           <NavbarContent>
             <UserDropdown />
           </NavbarContent>
