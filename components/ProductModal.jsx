@@ -35,7 +35,7 @@ const PRODUCT_TYPES = [
 
 const JUICE_TYPES = [
   { label: 'Select juice type', value: '' },
-  { label: 'Juice', value: 'APPLE' },
+  { label: 'Apple', value: 'APPLE' },
   { label: 'Carrot & Apple', value: 'CARROTAPPLE' },
   { label: 'Strawberry & Apple', value: 'STRAWBERRYAPPLE' },
   { label: 'Pear & Apple', value: 'PEARAPPLE' },
@@ -84,20 +84,20 @@ const ProductModal = ({ isOpen, onClose, onSubmit }) => {
       type_product: (value) => (value ? null : 'Field Required'),
       measurement: (value) => (value ? null : 'Field Required'),
       type_juice: (value) =>
-        !form.values.type_product === 'JUICE'
+        !form.values.type_product !== 'JUICE'
           ? null
           : value
           ? null
           : 'Field Required',
       type_apple: (value) =>
-        !form.values.type_product === 'APPLE'
+        !form.values.type_product !== 'APPLE'
           ? null
           : value
           ? null
           : 'Field Required',
 
       type_vinegar: (value) =>
-        !form.values.type_product === 'VINEGAR'
+        form.values.type_product !== 'VINEGAR'
           ? null
           : value
           ? null
@@ -110,17 +110,14 @@ const ProductModal = ({ isOpen, onClose, onSubmit }) => {
   const onFormSubmit = () => {
     form.validate();
     if (form.isValid()) {
-      console.log(form.values);
-      return;
-
       const formData = new FormData(document.getElementById('product-form'));
-      formData.append('photo', formData.get('file'));
-      formData.delete('file');
       onSubmit(formData)
         .then(() => {
           onClose();
         })
-        .catch((err) => form.setErrors(err.error));
+        .catch((err) => {
+          form.setErrors(err.response.data.error);
+        });
     }
   };
 
@@ -239,7 +236,7 @@ const ProductModal = ({ isOpen, onClose, onSubmit }) => {
               <Input
                 type="file"
                 {...getFieldProps('photo', 'Photo')}
-                onValueChange={() =>
+                onChange={() =>
                   form.setFieldValue(
                     'photo',
                     document.getElementById('photo').files[0]
