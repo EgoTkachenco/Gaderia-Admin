@@ -6,11 +6,11 @@ import { AuthContext } from '../contexts/AuthContext';
 import useAuth from '../components/hooks/useAuth';
 
 function MyApp({ Component, pageProps }) {
-  const { inited, isLogged, user, log, relog } = useAuth();
+  const { inited, isLogged, user, log, relog, logout } = useAuth();
 
   return (
     <NextThemesProvider defaultTheme="system" attribute="class">
-      <AuthContext.Provider value={{ isLogged, user, log, relog }}>
+      <AuthContext.Provider value={{ isLogged, user, log, relog, logout }}>
         <NextUIProvider>
           <Layout>{inited && <Component {...pageProps} />}</Layout>
         </NextUIProvider>

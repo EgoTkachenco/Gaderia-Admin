@@ -1,23 +1,23 @@
 import React from 'react';
 import { Sidebar } from './sidebar.styles';
-import { Avatar, Tooltip } from '@nextui-org/react';
-import { CompaniesDropdown } from './companies-dropdown';
-import { HomeIcon } from '../icons/sidebar/home-icon';
-import { PaymentsIcon } from '../icons/sidebar/payments-icon';
-import { BalanceIcon } from '../icons/sidebar/balance-icon';
-import { AccountsIcon } from '../icons/sidebar/accounts-icon';
+import { Image } from '@nextui-org/react';
+// import { CompaniesDropdown } from './companies-dropdown';
+// import { HomeIcon } from '../icons/sidebar/home-icon';
+// import { PaymentsIcon } from '../icons/sidebar/payments-icon';
+// import { BalanceIcon } from '../icons/sidebar/balance-icon';
+// import { AccountsIcon } from '../icons/sidebar/accounts-icon';
 import { CustomersIcon } from '../icons/sidebar/customers-icon';
 import { ProductsIcon } from '../icons/sidebar/products-icon';
-import { ReportsIcon } from '../icons/sidebar/reports-icon';
-import { DevIcon } from '../icons/sidebar/dev-icon';
-import { ViewIcon } from '../icons/sidebar/view-icon';
-import { SettingsIcon } from '../icons/sidebar/settings-icon';
-import { CollapseItems } from './collapse-items';
+// import { ReportsIcon } from '../icons/sidebar/reports-icon';
+// import { DevIcon } from '../icons/sidebar/dev-icon';
+// import { ViewIcon } from '../icons/sidebar/view-icon';
+// import { SettingsIcon } from '../icons/sidebar/settings-icon';
+// import { CollapseItems } from './collapse-items';
 import { SidebarItem } from './sidebar-item';
 import { SidebarMenu } from './sidebar-menu';
-import { FilterIcon } from '../icons/sidebar/filter-icon';
+// import { FilterIcon } from '../icons/sidebar/filter-icon';
 import { useSidebarContext } from '../layout/layout-context';
-import { ChangeLogIcon } from '../icons/sidebar/changelog-icon';
+// import { ChangeLogIcon } from '../icons/sidebar/changelog-icon';
 import { useRouter } from 'next/router';
 
 export const SidebarWrapper = () => {
@@ -30,21 +30,22 @@ export const SidebarWrapper = () => {
         <div className={Sidebar.Overlay()} onClick={setCollapsed} />
       ) : null}
       <div
-        className={Sidebar({
+        className={`${Sidebar({
           collapsed: collapsed,
-        })}
+        })} pt-4`}
       >
         <div className={Sidebar.Header()}>
-          <CompaniesDropdown />
+          {/* <CompaniesDropdown /> */}
+          <Image src="/logo.png" width={300} height={40} alt="Gaderia" />
         </div>
         <div className="flex flex-col justify-between h-full">
           <div className={Sidebar.Body()}>
-            <SidebarItem
+            {/* <SidebarItem
               title="Home"
               icon={<HomeIcon />}
               isActive={router.pathname === '/'}
               href="/"
-            />
+            /> */}
             <SidebarMenu title="Main Menu">
               {/* <SidebarItem
                 isActive={router.pathname === '/accounts'}
@@ -72,6 +73,12 @@ export const SidebarWrapper = () => {
                 title="Products"
                 icon={<ProductsIcon />}
                 href="products"
+              />
+              <SidebarItem
+                isActive={router.pathname === '/contacts'}
+                title="Contacts"
+                icon={<CustomersIcon />}
+                href="contacts"
               />
               {/* <SidebarItem
                 isActive={router.pathname === '/reports'}

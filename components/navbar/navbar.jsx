@@ -1,18 +1,16 @@
-import { Input, Link, Navbar, NavbarContent } from '@nextui-org/react';
-import React from 'react';
-import { FeedbackIcon } from '../icons/navbar/feedback-icon';
-import { GithubIcon } from '../icons/navbar/github-icon';
-import { SupportIcon } from '../icons/navbar/support-icon';
-import { SearchIcon } from '../icons/searchicon';
+import { Input, Link, Navbar, NavbarContent, Button } from '@nextui-org/react';
+import React, { useContext } from 'react';
+// import { FeedbackIcon } from '../icons/navbar/feedback-icon';
+// import { GithubIcon } from '../icons/navbar/github-icon';
+// import { SupportIcon } from '../icons/navbar/support-icon';
+// import { SearchIcon } from '../icons/searchicon';
 import { BurguerButton } from './burguer-button';
-import { NotificationsDropdown } from './notifications-dropdown';
-import { UserDropdown } from './user-dropdown';
+// import { NotificationsDropdown } from './notifications-dropdown';
+// import { UserDropdown } from './user-dropdown';
+import { AuthContext } from '../../contexts/AuthContext';
 
-interface Props {
-  children: React.ReactNode;
-}
-
-export const NavbarWrapper = ({ children }: Props) => {
+export const NavbarWrapper = ({ children }) => {
+  const { logout } = useContext(AuthContext);
   return (
     <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
       <Navbar
@@ -26,7 +24,7 @@ export const NavbarWrapper = ({ children }: Props) => {
           <BurguerButton />
         </NavbarContent>
         <NavbarContent className="w-full max-md:hidden">
-          <Input
+          {/* <Input
             startContent={<SearchIcon />}
             isClearable
             className="w-2/4"
@@ -35,7 +33,7 @@ export const NavbarWrapper = ({ children }: Props) => {
               mainWrapper: 'w-full',
             }}
             placeholder="Search..."
-          />
+          /> */}
         </NavbarContent>
         <NavbarContent
           justify="end"
@@ -58,9 +56,10 @@ export const NavbarWrapper = ({ children }: Props) => {
           >
             <GithubIcon />
           </Link> */}
-          <NavbarContent>
+          <Button onClick={logout}>Log Out</Button>
+          {/* <NavbarContent>
             <UserDropdown />
-          </NavbarContent>
+          </NavbarContent> */}
         </NavbarContent>
       </Navbar>
       {children}

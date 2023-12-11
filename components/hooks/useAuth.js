@@ -34,13 +34,14 @@ const useAuth = () => {
     }
 
     setUser(JSON.parse(user));
-    if (router.pathname === '/login') return router.push('/');
+    if (router.pathname === '/login') return router.push('/products');
     return Promise.resolve();
   };
 
-  const logOut = () => {
+  const logout = () => {
     eraseToken();
     setUser(null);
+    router.push('/login');
   };
 
   useEffect(() => {
@@ -50,7 +51,7 @@ const useAuth = () => {
     });
   }, []);
 
-  return { inited, isLogged, user, log, relog, logOut };
+  return { inited, isLogged, user, log, relog, logout };
 };
 
 export default useAuth;

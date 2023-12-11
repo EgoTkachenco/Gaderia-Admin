@@ -10,7 +10,7 @@ import {
 import React from 'react';
 import { RenderCell } from './render-cell';
 
-export const TableWrapper = ({ columns = [], data = [] }) => {
+export const TableWrapper = ({ columns = [], data = [], actions }) => {
   if (!data) return;
   return (
     <div className=" w-full flex flex-col gap-4">
@@ -34,6 +34,8 @@ export const TableWrapper = ({ columns = [], data = [] }) => {
                   <TableCell>
                     {RenderCell({
                       data: item[key],
+                      columnData: item,
+                      column: columns.find((c) => c.uid === key),
                       type: columns.find((c) => c.uid === key)?.type,
                     })}
                   </TableCell>

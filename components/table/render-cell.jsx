@@ -4,7 +4,7 @@ import { DeleteIcon } from '../icons/table/delete-icon';
 import { EditIcon } from '../icons/table/edit-icon';
 import { EyeIcon } from '../icons/table/eye-icon';
 
-export const RenderCell = ({ data, type }) => {
+export const RenderCell = ({ data, columnData, type, column }) => {
   switch (type) {
     // case 'name':
     //   return (
@@ -76,6 +76,14 @@ export const RenderCell = ({ data, type }) => {
           </div>
         </div>
       );
+    case 'user':
+      return (
+        <div className="flex flex-col gap-2">
+          <span>{data.full_name}</span>
+          <span>{data.email}</span>
+          <span>{data.number}</span>
+        </div>
+      );
     case 'picture':
       return (
         <Image
@@ -96,6 +104,8 @@ export const RenderCell = ({ data, type }) => {
           {data}
         </div>
       );
+    case 'custom':
+      return column.render(columnData);
     case 'text':
     default:
       return data;
