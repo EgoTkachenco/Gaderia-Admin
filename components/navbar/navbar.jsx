@@ -6,8 +6,9 @@ import React, { useContext } from 'react';
 // import { SearchIcon } from '../icons/searchicon';
 import { BurguerButton } from './burguer-button';
 // import { NotificationsDropdown } from './notifications-dropdown';
-// import { UserDropdown } from './user-dropdown';
+import { UserDropdown } from './user-dropdown';
 import { AuthContext } from '../../contexts/AuthContext';
+import { DarkModeSwitch } from './darkmodeswitch';
 
 export const NavbarWrapper = ({ children }) => {
   const { logout } = useContext(AuthContext);
@@ -56,10 +57,13 @@ export const NavbarWrapper = ({ children }) => {
           >
             <GithubIcon />
           </Link> */}
-          <Button onClick={logout}>Log Out</Button>
-          {/* <NavbarContent>
-            <UserDropdown />
-          </NavbarContent> */}
+          <NavbarContent>
+            {/* <UserDropdown /> */}
+            <DarkModeSwitch />
+            <Button onClick={logout} color="danger">
+              Log Out
+            </Button>
+          </NavbarContent>
         </NavbarContent>
       </Navbar>
       {children}

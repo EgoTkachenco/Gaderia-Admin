@@ -35,9 +35,7 @@ export const Login = () => {
   return (
     <div className="flex h-screen flex-col justify-center px-6 py-12 lg:px-8 items-center">
       <div className="bg-default-50 shadow-lg rounded-xl p-8 w-96">
-        <h3 className="text-center text-xl font-bold text-white">
-          Gaderia Admin Panel
-        </h3>
+        <h3 className="text-center text-xl font-bold ">Gaderia Admin Panel</h3>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-8" onSubmit={form.onSubmit(onSubmit)}>
