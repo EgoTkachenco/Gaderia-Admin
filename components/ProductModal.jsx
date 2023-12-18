@@ -79,7 +79,7 @@ const ProductModal = ({ isOpen, onClose, onSubmit }) => {
     validate: {
       header: (value) => {
         if (!value) return 'Field Required';
-        if (value.length > 40) return 'Too long, max size 40';
+        if (value.length > 50) return 'Too long, max size 40';
         return null;
       },
       description: (value) => (value ? null : 'Field Required'),
