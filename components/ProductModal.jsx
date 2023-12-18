@@ -77,7 +77,11 @@ const ProductModal = ({ isOpen, onClose, onSubmit }) => {
     initialValues: new_product,
 
     validate: {
-      header: (value) => (value ? null : 'Field Required'),
+      header: (value) => {
+        if (!value) return 'Field Required';
+        if (value.length > 40) return 'Too long, max size 40';
+        return null;
+      },
       description: (value) => (value ? null : 'Field Required'),
       price: (value) => (value ? null : 'Field Required'),
       type_measurement: (value) => (value ? null : 'Field Required'),
