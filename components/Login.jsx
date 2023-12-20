@@ -27,8 +27,8 @@ export const Login = () => {
         log(res.data.data);
         router.push('/');
       })
-      .catch((error) => {
-        console.log(error.message);
+      .catch((err) => {
+        form.setErrors(err.response?.data?.error);
       });
   };
 

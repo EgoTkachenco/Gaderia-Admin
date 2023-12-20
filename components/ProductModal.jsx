@@ -12,7 +12,6 @@ import {
 import { Select, SelectItem } from '@nextui-org/select';
 import { useForm } from '@mantine/form';
 import { useEffect } from 'react';
-import { useCallback } from 'react';
 
 const new_product = {
   header: '',
@@ -120,7 +119,7 @@ const ProductModal = ({ isOpen, onClose, onSubmit }) => {
           onClose();
         })
         .catch((err) => {
-          form.setErrors(err.response.data.error);
+          form.setErrors(err.response?.data?.error);
         });
     }
   };
@@ -246,7 +245,8 @@ const ProductModal = ({ isOpen, onClose, onSubmit }) => {
                     document.getElementById('photo').files[0]
                   )
                 }
-                isInvalid={!!form.getInputProps('photo').error}
+                // isInvalid={!!form.getInputProps('photo').error}
+                errorMessage={form.getInputProps('photo').error}
               />
               <div>
                 {form.getInputProps('photo')?.value && (
@@ -300,7 +300,8 @@ const CSelect = ({
       if (id == 'type_product')
         form.setValues({ type_juice: '', type_vinegar: '', type_apple: '' });
     }}
-    isInvalid={!!form.getInputProps(id).error}
+    // isInvalid={!!form.getInputProps(id).error}
+    errorMessage={form.getInputProps(id).error}
     {...props}
   >
     {(item) => (
@@ -316,7 +317,8 @@ const CInput = ({ form, id, name, isHalfWidth, ...props }) => {
       {...getFieldProps(id, name, false, isHalfWidth)}
       value={form.getInputProps(id).value}
       onValueChange={(v) => form.getInputProps(id).onChange(v)}
-      isInvalid={!!form.getInputProps(id).error}
+      // isInvalid={!!form.getInputProps(id).error}
+      errorMessage={form.getInputProps(id).error}
       {...props}
     />
   );

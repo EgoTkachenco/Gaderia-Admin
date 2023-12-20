@@ -30,16 +30,19 @@ export const TableWrapper = ({ columns = [], data = [], actions }) => {
           <TableBody items={data}>
             {(item, i) => (
               <TableRow key={i}>
-                {(key) => (
-                  <TableCell>
-                    {RenderCell({
-                      data: item[key],
-                      columnData: item,
-                      column: columns.find((c) => c.uid === key),
-                      type: columns.find((c) => c.uid === key)?.type,
-                    })}
-                  </TableCell>
-                )}
+                {(key) => {
+                  const column = columns.find((c) => c.uid === key);
+                  return (
+                    <TableCell>
+                      {RenderCell({
+                        data: item[key],
+                        columnData: item,
+                        column,
+                        type: column?.type,
+                      })}
+                    </TableCell>
+                  );
+                }}
               </TableRow>
             )}
           </TableBody>

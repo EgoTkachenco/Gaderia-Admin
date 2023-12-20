@@ -1,15 +1,6 @@
-import { Button, Input } from '@nextui-org/react';
-import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
-import { DotsIcon } from './icons/accounts/dots-icon';
-import { ExportIcon } from './icons/accounts/export-icon';
-import { InfoIcon } from './icons/accounts/info-icon';
-import { TrashIcon } from './icons/accounts/trash-icon';
-import { HouseIcon } from './icons/breadcrumb/house-icon';
-import { UsersIcon } from './icons/breadcrumb/users-icon';
-import { SettingsIcon } from './icons/sidebar/settings-icon';
+import { Button } from '@nextui-org/react';
+import React, { useMemo, useState } from 'react';
 import { TableWrapper } from './table/table';
-// import { AddUser } from "./add-user";
 import { getCatalog, createCatalog } from '../api';
 import useTableAPIRequest from './hooks/useTableAPIRequest';
 import ProductModal from './ProductModal';
@@ -22,6 +13,15 @@ export const Products = () => {
       onRequest();
     });
 
+  const formatedData = useMemo(
+    () =>
+      data?.map((item) => ({
+        ...item,
+        measurement: item.measurement + ' ' + item.type_measurement,
+      })),
+    [data]
+  );
+
   return (
     <div className=" w-full flex flex-col gap-4">
       <div className="flex items-center justify-between">
@@ -31,7 +31,10 @@ export const Products = () => {
         </Button>
       </div>
       <div className="w-full">
-        <TableWrapper columns={productModel} data={data} />
+        {!isFetch && (
+          <TableWrapper columns={productModel} data={formatedData} />
+        )}
+        {isFetch && <div>Loading...</div>}
       </div>
       <ProductModal
         isOpen={activeProduct}
@@ -44,17 +47,21 @@ export const Products = () => {
 
 const productModel = [
   { name: 'ID', uid: 'id', type: 'text' },
-  { name: 'Picture', uid: 'picture', type: 'picture' },
-  { name: 'Header', uid: 'header', type: 'text' },
-  { name: 'Description', uid: 'description', type: 'long-text' },
+  { name: 'Picture', uid: 'picture', type: 'picture', width: '150px' },
+  { name: 'Header', uid: 'header', type: 'text', width: '250px' },
+  {
+    name: 'Description',
+    uid: 'description',
+    type: 'long-text',
+    width: '250px',
+  },
   { name: 'Count', uid: 'count', type: 'text' },
   { name: 'Price', uid: 'price', type: 'text' },
-  { name: 'Price discount', uid: 'price_discount', type: 'text' },
-  { name: 'Type measurement', uid: 'type_measurement', type: 'text' },
+  { name: 'Discount', uid: 'price_discount', type: 'text' },
   { name: 'Measurement', uid: 'measurement', type: 'text' },
   { name: 'Type Product', uid: 'type_product', type: 'text' },
   { name: 'Type Apple', uid: 'type_apple', type: 'text' },
-  // { name: '', uid: '', type: 'text' },
-  // { name: '', uid: '', type: 'text' },
-  // { name: 'Actions', uid: 'actions', type: 'actions' },
+  { name: 'Type Juice', uid: 'type_juice', type: 'text' },
+  { name: 'Type Vinegar', uid: 'type_vinegar', type: 'text' },
+  { name: 'Type Packaging', uid: 'type_packaging', type: 'text' },
 ];

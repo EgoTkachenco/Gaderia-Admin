@@ -5,6 +5,10 @@ import { EditIcon } from '../icons/table/edit-icon';
 import { EyeIcon } from '../icons/table/eye-icon';
 
 export const RenderCell = ({ data, columnData, type, column }) => {
+  const getWidthStyles = () => ({
+    maxWidth: column?.width || 'unset',
+    minWidth: column?.width || 'unset',
+  });
   switch (type) {
     // case 'name':
     //   return (
@@ -86,21 +90,19 @@ export const RenderCell = ({ data, columnData, type, column }) => {
       );
     case 'picture':
       return (
-        <Image
-          src={data}
-          alt="picture"
-          width={300}
-          height={300}
-          style={{ objectFit: 'contain ' }}
-        />
+        <div style={getWidthStyles()}>
+          <Image
+            src={data}
+            alt="picture"
+            width={150}
+            height={150}
+            style={{ objectFit: 'contain ' }}
+          />
+        </div>
       );
     case 'long-text':
       return (
-        <div
-          title={data}
-          className=""
-          style={{ maxWidth: '250px', minWidth: '250px' }}
-        >
+        <div title={data} className="line-clamp-3" style={getWidthStyles()}>
           {data}
         </div>
       );
@@ -108,6 +110,10 @@ export const RenderCell = ({ data, columnData, type, column }) => {
       return column.render(columnData);
     case 'text':
     default:
-      return data;
+      return (
+        <div className="line-clamp-1" style={getWidthStyles()}>
+          {data}
+        </div>
+      );
   }
 };
