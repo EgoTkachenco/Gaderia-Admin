@@ -1,5 +1,4 @@
 import {
-  Link,
   Table,
   TableBody,
   TableCell,
@@ -10,7 +9,12 @@ import {
 import React from 'react';
 import { RenderCell } from './render-cell';
 
-export const TableWrapper = ({ columns = [], data = [], actions }) => {
+export const TableWrapper = ({
+  columns = [],
+  data = [],
+  onUpdate,
+  onDelete,
+}) => {
   if (!data) return;
   return (
     <div className=" w-full flex flex-col gap-4">
@@ -36,9 +40,11 @@ export const TableWrapper = ({ columns = [], data = [], actions }) => {
                     <TableCell>
                       {RenderCell({
                         data: item[key],
-                        columnData: item,
+                        rowData: item,
                         column,
                         type: column?.type,
+                        onUpdate,
+                        onDelete,
                       })}
                     </TableCell>
                   );

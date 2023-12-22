@@ -71,7 +71,9 @@ const MEASUREMENT_TYPES = [
   { label: 'Liter', value: 'LITER' },
 ];
 
-const ProductModal = ({ isOpen, onClose, onSubmit }) => {
+const ProductModal = ({ product, onClose, onSubmit }) => {
+  const isOpen = !!product;
+  const isNew = !product?.id;
   const form = useForm({
     initialValues: new_product,
 
@@ -106,14 +108,25 @@ const ProductModal = ({ isOpen, onClose, onSubmit }) => {
           ? null
           : 'Field Required',
       type_packaging: (value) => (value ? null : 'Field Required'),
-      photo: (value) => (value ? null : 'Field Required'),
+      // photo: (value) => (value ? null : 'Field Required'),
     },
   });
 
   const onFormSubmit = () => {
     form.validate();
     if (form.isValid()) {
-      const formData = new FormData(document.getElementById('product-form'));
+      let formData;
+
+      if (isNew) {
+        formData = new FormData(document.getElementById('product-form'));
+      } else {
+        formData = new FormData(document.getElementById('product-form'));
+        if (!form.values.photo) formData.delete('photo');
+        // formData = new FormData();
+        // formData.append('description', form.values.description);
+        // formData.append('price', form.values.price);
+      }
+
       onSubmit(formData)
         .then(() => {
           onClose();
@@ -125,13 +138,27 @@ const ProductModal = ({ isOpen, onClose, onSubmit }) => {
   };
 
   useEffect(() => {
-    form.reset();
+    if (isOpen) {
+      const f_p = Object.keys(product || {}).reduce(
+        (acc, key) => ({
+          ...acc,
+          [key]: product[key] !== null ? product[key] : '',
+        }),
+        {}
+      );
+      form.setValues(f_p);
+    }
+    return () => {
+      form.reset();
+    };
   }, [isOpen]);
 
   return (
     <Modal size="3xl" isOpen={isOpen} onClose={onClose}>
       <ModalContent>
-        <ModalHeader className="flex flex-col gap-1">New Product</ModalHeader>
+        <ModalHeader className="flex flex-col gap-1">
+          {isNew ? 'New' : 'Update'} Product
+        </ModalHeader>
         <ModalBody>
           <form
             id="product-form"
@@ -152,6 +179,7 @@ const ProductModal = ({ isOpen, onClose, onSubmit }) => {
                   form={form}
                   isRequired
                   type="number"
+                  step="0.1"
                   id="measurement"
                   name="Measurement"
                   isHalfWidth={true}
@@ -174,7 +202,7 @@ const ProductModal = ({ isOpen, onClose, onSubmit }) => {
                   items={PRODUCT_TYPES}
                 />
 
-                {form.values.type_product === 'JUICE' && (
+                {form.values?.type_product === 'JUICE' && (
                   <CSelect
                     form={form}
                     id="type_juice"
@@ -182,7 +210,7 @@ const ProductModal = ({ isOpen, onClose, onSubmit }) => {
                     items={JUICE_TYPES}
                   />
                 )}
-                {form.values.type_product === 'VINEGAR' && (
+                {form.values?.type_product === 'VINEGAR' && (
                   <CSelect
                     form={form}
                     id="type_vinegar"
@@ -190,7 +218,7 @@ const ProductModal = ({ isOpen, onClose, onSubmit }) => {
                     items={VINEGAR_TYPES}
                   />
                 )}
-                {form.values.type_product === 'APPLE' && (
+                {form.values?.type_product === 'APPLE' && (
                   <CSelect
                     form={form}
                     id="type_apple"
@@ -224,6 +252,7 @@ const ProductModal = ({ isOpen, onClose, onSubmit }) => {
                     className="mt-4"
                     name="is_discount"
                     {...form.getInputProps('is_discount')}
+                    isSelected={form.values.is_discount}
                   />
                   <CInput
                     form={form}
@@ -249,15 +278,23 @@ const ProductModal = ({ isOpen, onClose, onSubmit }) => {
                 errorMessage={form.getInputProps('photo').error}
               />
               <div>
-                {form.getInputProps('photo')?.value && (
+                {form.value?.photo ? (
                   <Image
-                    src={URL.createObjectURL(form.getInputProps('photo').value)}
+                    src={URL.createObjectURL(form.value?.photo)}
                     alt="Picture"
                     width={200}
                     height={200}
                     style={{ objectFit: 'contain' }}
                   />
-                )}
+                ) : product?.picture ? (
+                  <Image
+                    src={product.picture}
+                    alt="Picture"
+                    width={200}
+                    height={200}
+                    style={{ objectFit: 'contain' }}
+                  />
+                ) : null}
               </div>
             </div>
           </form>
@@ -267,7 +304,7 @@ const ProductModal = ({ isOpen, onClose, onSubmit }) => {
             Close
           </Button>
           <Button color="primary" onClick={onFormSubmit}>
-            Create
+            {isNew ? 'Create' : 'Update'}
           </Button>
         </ModalFooter>
       </ModalContent>
@@ -332,3 +369,9 @@ const getFieldProps = (id, name, isSelect = false, isHalfWidth = false) => ({
   placeholder: `${isSelect ? 'Select' : 'Enter'} ${name.toLowerCase()}`,
   labelPlacement: 'outside',
 });
+
+const formatProduct = (data) =>
+  Object.keys(data || {}).reduce(
+    (acc, key) => ({ ...acc, [key]: data[key] || '' }),
+    {}
+  );

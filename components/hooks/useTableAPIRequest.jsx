@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 const useTableAPIRequest = (
   request = async (params) => new Promise(),
-  initialParams = { page: 0, limit: 10 }
+  initialParams = { page: 0, limit: 10000 }
 ) => {
   const [params, setParams] = useState(initialParams);
   const [data, setData] = useState(null);

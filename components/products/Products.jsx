@@ -1,23 +1,43 @@
 import { Button } from '@nextui-org/react';
 import React, { useMemo, useState } from 'react';
-import { TableWrapper } from './table/table';
-import { getCatalog, createCatalog } from '../api';
-import useTableAPIRequest from './hooks/useTableAPIRequest';
+import { TableWrapper } from '../table/table';
+import {
+  getCatalog,
+  createCatalog,
+  updateCatalog,
+  deleteCatalog,
+} from '../../api';
+import useTableAPIRequest from '../hooks/useTableAPIRequest';
 import ProductModal from './ProductModal';
 
 export const Products = () => {
   const { data, params, isFetch, onRequest } = useTableAPIRequest(getCatalog);
   const [activeProduct, setActiveProduct] = useState(null);
-  const handleProduct = (product) =>
-    createCatalog(product).then(() => {
+  const handleProduct = (product) => {
+    if (!activeProduct.id) {
+      return createCatalog(product).then(() => {
+        onRequest();
+      });
+    } else {
+      product.append('catalog_id', activeProduct.id);
+      return updateCatalog(product).then(() => {
+        onRequest();
+      });
+    }
+  };
+
+  const handleProductDelete = (id) => {
+    debugger;
+    deleteCatalog(id).then(() => {
       onRequest();
     });
+  };
 
   const formatedData = useMemo(
     () =>
       data?.map((item) => ({
         ...item,
-        measurement: item.measurement + ' ' + item.type_measurement,
+        measurement_label: item.measurement + ' ' + item.type_measurement,
       })),
     [data]
   );
@@ -32,12 +52,17 @@ export const Products = () => {
       </div>
       <div className="w-full">
         {!isFetch && (
-          <TableWrapper columns={productModel} data={formatedData} />
+          <TableWrapper
+            columns={productModel}
+            data={formatedData}
+            onUpdate={(item) => setActiveProduct(item)}
+            onDelete={(id) => handleProductDelete(id)}
+          />
         )}
         {isFetch && <div>Loading...</div>}
       </div>
       <ProductModal
-        isOpen={activeProduct}
+        product={activeProduct}
         onClose={() => setActiveProduct(null)}
         onSubmit={handleProduct}
       />
@@ -58,10 +83,11 @@ const productModel = [
   { name: 'Count', uid: 'count', type: 'text' },
   { name: 'Price', uid: 'price', type: 'text' },
   { name: 'Discount', uid: 'price_discount', type: 'text' },
-  { name: 'Measurement', uid: 'measurement', type: 'text' },
+  { name: 'Measurement', uid: 'measurement_label', type: 'text' },
   { name: 'Type Product', uid: 'type_product', type: 'text' },
   { name: 'Type Apple', uid: 'type_apple', type: 'text' },
   { name: 'Type Juice', uid: 'type_juice', type: 'text' },
   { name: 'Type Vinegar', uid: 'type_vinegar', type: 'text' },
   { name: 'Type Packaging', uid: 'type_packaging', type: 'text' },
+  { uid: 'actions', type: 'actions' },
 ];

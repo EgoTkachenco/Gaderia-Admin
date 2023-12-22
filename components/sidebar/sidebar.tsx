@@ -3,9 +3,9 @@ import { Sidebar } from './sidebar.styles';
 import { Image } from '@nextui-org/react';
 // import { CompaniesDropdown } from './companies-dropdown';
 // import { HomeIcon } from '../icons/sidebar/home-icon';
-// import { PaymentsIcon } from '../icons/sidebar/payments-icon';
+import { PaymentsIcon } from '../icons/sidebar/payments-icon';
 // import { BalanceIcon } from '../icons/sidebar/balance-icon';
-// import { AccountsIcon } from '../icons/sidebar/accounts-icon';
+import { AccountsIcon } from '../icons/sidebar/accounts-icon';
 import { CustomersIcon } from '../icons/sidebar/customers-icon';
 import { ProductsIcon } from '../icons/sidebar/products-icon';
 // import { ReportsIcon } from '../icons/sidebar/reports-icon';
@@ -79,6 +79,18 @@ export const SidebarWrapper = () => {
                 title="Contacts"
                 icon={<CustomersIcon />}
                 href="contacts"
+              />
+              <SidebarItem
+                isActive={router.pathname === '/orders'}
+                title="Orders"
+                icon={<PaymentsIcon />}
+                href="orders"
+              />
+              <SidebarItem
+                isActive={router.pathname === '/users'}
+                title="Accounts"
+                icon={<AccountsIcon />}
+                href="users"
               />
               {/* <SidebarItem
                 isActive={router.pathname === '/reports'}
