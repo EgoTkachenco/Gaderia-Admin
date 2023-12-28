@@ -140,7 +140,10 @@ const DetailsModal = ({ data, rowStyle }) => {
   model[1].width = 50;
   return (
     <>
-      <span className="underline font-bold" onClick={() => setOpen(!open)}>
+      <span
+        className="underline font-bold cursor-pointer"
+        onClick={() => setOpen(!open)}
+      >
         List
       </span>
       <Modal size="5xl" isOpen={open} onClose={() => setOpen(false)}>
