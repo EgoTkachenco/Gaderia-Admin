@@ -1,19 +1,26 @@
 import { Button, Checkbox, Input } from '@nextui-org/react';
 import React, { useEffect, useState } from 'react';
 import { TableWrapper } from './table/table';
-// import { AddUser } from "./add-user";
-import { getContacts, createCatalog } from '../api';
+import { getContacts } from '../api';
 import useTableAPIRequest from './hooks/useTableAPIRequest';
+import Pagination from './Pagination';
 
 export const Contacts = () => {
-  const { data, params, isFetch, onRequest, setParams } = useTableAPIRequest(
-    getContacts,
-    {
-      page: 0,
-      limit: 10,
-      is_view: true,
-    }
-  );
+  const {
+    data,
+    params,
+    isFetch,
+    onRequest,
+    setParams,
+    isNext,
+    nextPage,
+    prevPage,
+    isPrev,
+  } = useTableAPIRequest(getContacts, {
+    page: 0,
+    limit: 10,
+    is_view: true,
+  });
   const handleContactView = (contact_id) => {
     console.log(contact_id);
   };
@@ -50,6 +57,12 @@ export const Contacts = () => {
             },
           ]}
           data={data}
+        />
+        <Pagination
+          isNext={isNext}
+          onNext={nextPage}
+          onPrev={prevPage}
+          isPrev={isPrev}
         />
       </div>
     </div>

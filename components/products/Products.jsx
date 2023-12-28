@@ -9,9 +9,19 @@ import {
 } from '../../api';
 import useTableAPIRequest from '../hooks/useTableAPIRequest';
 import ProductModal from './ProductModal';
+import Pagination from '../Pagination';
 
 export const Products = () => {
-  const { data, params, isFetch, onRequest } = useTableAPIRequest(getCatalog);
+  const {
+    data,
+    params,
+    isFetch,
+    onRequest,
+    isNext,
+    nextPage,
+    prevPage,
+    isPrev,
+  } = useTableAPIRequest(getCatalog);
   const [activeProduct, setActiveProduct] = useState(null);
   const handleProduct = (product) => {
     if (!activeProduct.id) {
@@ -52,12 +62,20 @@ export const Products = () => {
       </div>
       <div className="w-full">
         {!isFetch && (
-          <TableWrapper
-            columns={productModel}
-            data={formatedData}
-            onUpdate={(item) => setActiveProduct(item)}
-            onDelete={(id) => handleProductDelete(id)}
-          />
+          <>
+            <TableWrapper
+              columns={productModel}
+              data={formatedData}
+              onUpdate={(item) => setActiveProduct(item)}
+              onDelete={(id) => handleProductDelete(id)}
+            />
+            <Pagination
+              isNext={isNext}
+              onNext={nextPage}
+              onPrev={prevPage}
+              isPrev={isPrev}
+            />
+          </>
         )}
         {isFetch && <div>Loading...</div>}
       </div>
@@ -70,7 +88,7 @@ export const Products = () => {
   );
 };
 
-const productModel = [
+export const productModel = [
   { name: 'ID', uid: 'id', type: 'text' },
   { name: 'Picture', uid: 'picture', type: 'picture', width: '150px' },
   { name: 'Header', uid: 'header', type: 'text', width: '250px' },

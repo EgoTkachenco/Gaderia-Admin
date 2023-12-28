@@ -5,14 +5,22 @@ import { getOrders, updateOrder } from '../../api';
 import useTableAPIRequest from '../hooks/useTableAPIRequest';
 import OrderModal, { STATUSES } from './OrderModal';
 import { Select, SelectItem } from '@nextui-org/select';
+import Pagination from '../Pagination';
 
 export const Orders = () => {
-  const { data, params, isFetch, onRequest, setParams } = useTableAPIRequest(
-    getOrders,
-    {
-      status: 'CANCELED',
-    }
-  );
+  const {
+    data,
+    params,
+    isFetch,
+    onRequest,
+    setParams,
+    isNext,
+    nextPage,
+    prevPage,
+    isPrev,
+  } = useTableAPIRequest(getOrders, {
+    status: 'CANCELED',
+  });
   const [activeOrder, setActiveOrder] = useState(null);
   const handleOrder = ({ status, ttn }) => {
     return updateOrder({ status, ttn, id: activeOrder.id }).then(() => {
@@ -51,11 +59,20 @@ export const Orders = () => {
       </div>
       <div className="w-full">
         {!isFetch && (
-          <TableWrapper
-            columns={orderModel}
-            data={formatedData}
-            onUpdate={(item) => setActiveOrder(item)}
-          />
+          <>
+            <TableWrapper
+              columns={orderModel}
+              data={formatedData}
+              onUpdate={(item) => setActiveOrder(item)}
+            />
+
+            <Pagination
+              isNext={isNext}
+              onNext={nextPage}
+              onPrev={prevPage}
+              isPrev={isPrev}
+            />
+          </>
         )}
         {isFetch && <div>Loading...</div>}
       </div>

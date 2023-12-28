@@ -1,7 +1,17 @@
-import { User, Tooltip, Chip, Image } from '@nextui-org/react';
-import React, { Fragment } from 'react';
+import {
+  Tooltip,
+  Image,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+} from '@nextui-org/react';
+import React, { useState, Fragment } from 'react';
 import { DeleteIcon } from '../icons/table/delete-icon';
 import { EditIcon } from '../icons/table/edit-icon';
+import { productModel } from '../products/Products';
+import { TableWrapper as Table } from './table';
+import _ from 'lodash';
 
 export const RenderCell = ({
   data,
@@ -51,21 +61,7 @@ export const RenderCell = ({
         </div>
       );
     case 'list':
-      return (
-        <div className="flex flex-col gap-2" style={getWidthStyles()}>
-          {rowData.catalog_list_id.map((item) => (
-            <Fragment key={item.id}>
-              <span>{item.model_catalog.header}</span>
-              <span>{item.model_catalog.price}</span>
-              <span>
-                {item.model_catalog.measurement}{' '}
-                {item.model_catalog.type_measurement}
-              </span>
-              ------
-            </Fragment>
-          ))}
-        </div>
-      );
+      return <DetailsModal data={rowData} rowStyle={getWidthStyles()} />;
     case 'company':
       return (
         <div className="flex flex-col gap-2" style={getWidthStyles()}>
@@ -107,8 +103,8 @@ export const RenderCell = ({
           <Image
             src={data}
             alt="picture"
-            width={150}
-            height={150}
+            width={column.width || 150}
+            height={column.width || 150}
             style={{ objectFit: 'contain ' }}
           />
         </div>
@@ -129,4 +125,34 @@ export const RenderCell = ({
         </div>
       );
   }
+};
+
+const DetailsModal = ({ data, rowStyle }) => {
+  const [open, setOpen] = useState(false);
+  const table_data = data.catalog_list_id.map((item) => ({
+    ...item.model_catalog,
+    measurement:
+      item.model_catalog.measurement +
+      ' ' +
+      item.model_catalog.type_measurement,
+  }));
+  const model = _.cloneDeep(productModel);
+  model[1].width = 50;
+  return (
+    <>
+      <span className="underline font-bold" onClick={() => setOpen(!open)}>
+        List
+      </span>
+      <Modal size="5xl" isOpen={open} onClose={() => setOpen(false)}>
+        <ModalContent>
+          <ModalHeader className="flex flex-col gap-1">Order List</ModalHeader>
+          <ModalBody>
+            <div className="flex flex-col gap-2" style={rowStyle}>
+              <Table data={table_data} columns={model} />
+            </div>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+    </>
+  );
 };
