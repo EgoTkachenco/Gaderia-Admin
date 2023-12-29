@@ -28,7 +28,7 @@ export const Contacts = () => {
   return (
     <div className=" w-full flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-xl font-semibold">All Contacts</h3>
+        <h3 className="text-xl font-semibold">Всі контакти</h3>
         <div>
           <Checkbox
             isSelected={params.is_view}
@@ -36,7 +36,7 @@ export const Contacts = () => {
               setParams({ page: 0, limit: 10, is_view: !params.is_view })
             }
           >
-            Is viewed
+            Переглянуто
           </Checkbox>
         </div>
       </div>
@@ -71,7 +71,7 @@ export const Contacts = () => {
 
 const contactModel = [
   { name: 'ID', uid: 'id', type: 'text' },
-  { name: 'Client', uid: 'model_user', type: 'user' },
-  { name: 'Comment', uid: 'comment', type: 'text' },
-  { name: 'Viewed', uid: 'is_view', type: 'boolean' },
+  { name: 'Клієнт', uid: 'model_user', type: 'user' },
+  { name: 'Коментар', uid: 'comment', type: 'text' },
+  { name: 'Переглянуто', uid: 'is_view', type: 'boolean' },
 ];

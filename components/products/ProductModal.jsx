@@ -26,14 +26,14 @@ const new_product = {
 };
 
 const PRODUCT_TYPES = [
-  { label: 'Select product type', value: '' },
+  { label: 'Оберіть тип продукту', value: '' },
   { label: 'Juice', value: 'JUICE' },
   { label: 'Vinegar', value: 'VINEGAR' },
   { label: 'Apple', value: 'APPLE' },
 ];
 
 const JUICE_TYPES = [
-  { label: 'Select juice type', value: '' },
+  { label: 'Оберіть тип соку', value: '' },
   { label: 'Apple', value: 'APPLE' },
   { label: 'Carrot & Apple', value: 'CARROTAPPLE' },
   { label: 'Strawberry & Apple', value: 'STRAWBERRYAPPLE' },
@@ -41,13 +41,13 @@ const JUICE_TYPES = [
 ];
 
 const VINEGAR_TYPES = [
-  { label: 'Select vinegar type', value: '' },
+  { label: 'Оберіть тип оцту', value: '' },
   { label: 'Filtered', value: 'FILTERED' },
   { label: 'Unfiltered', value: 'UNFILTERED' },
 ];
 
 const APPLE_TYPES = [
-  { label: 'Select apple type', value: '' },
+  { label: 'Оберіть тип яблука', value: '' },
   { label: 'Red Jonaprince', value: 'REDJONAPRINCE' },
   { label: 'Modi', value: 'MODI' },
   { label: 'Idared', value: 'IDARED' },
@@ -60,13 +60,13 @@ const APPLE_TYPES = [
 ];
 
 const PACKAGIN_TYPES = [
-  { label: 'Select package type', value: '' },
+  { label: 'Оберіть тип пакування', value: '' },
   { label: 'Glass', value: 'GLASS' },
   { label: 'Bag in box', value: 'BAGINBOX' },
 ];
 
 const MEASUREMENT_TYPES = [
-  { label: 'Select measure type', value: '' },
+  { label: 'Оберіть тип міри', value: '' },
   { label: 'Kg', value: 'KG' },
   { label: 'Liter', value: 'LITER' },
 ];
@@ -79,36 +79,36 @@ const ProductModal = ({ product, onClose, onSubmit }) => {
 
     validate: {
       header: (value) => {
-        if (!value) return 'Field Required';
-        if (value.length > 50) return 'Too long, max size 40';
+        if (!value) return "Поле обов'язкове";
+        if (value.length > 50) return 'Поле задовге, максимальна довжина  50';
         return null;
       },
-      description: (value) => (value ? null : 'Field Required'),
-      price: (value) => (value ? null : 'Field Required'),
-      type_measurement: (value) => (value ? null : 'Field Required'),
-      type_product: (value) => (value ? null : 'Field Required'),
-      measurement: (value) => (value ? null : 'Field Required'),
+      description: (value) => (value ? null : "Поле обов'язкове"),
+      price: (value) => (value ? null : "Поле обов'язкове"),
+      type_measurement: (value) => (value ? null : "Поле обов'язкове"),
+      type_product: (value) => (value ? null : "Поле обов'язкове"),
+      measurement: (value) => (value ? null : "Поле обов'язкове"),
       type_juice: (value) =>
         !form.values.type_product !== 'JUICE'
           ? null
           : value
           ? null
-          : 'Field Required',
+          : "Поле обов'язкове",
       type_apple: (value) =>
         !form.values.type_product !== 'APPLE'
           ? null
           : value
           ? null
-          : 'Field Required',
+          : "Поле обов'язкове",
 
       type_vinegar: (value) =>
         form.values.type_product !== 'VINEGAR'
           ? null
           : value
           ? null
-          : 'Field Required',
-      type_packaging: (value) => (value ? null : 'Field Required'),
-      // photo: (value) => (value ? null : 'Field Required'),
+          : "Поле обов'язкове",
+      type_packaging: (value) => (value ? null : "Поле обов'язкове"),
+      // photo: (value) => (value ? null : 'Поле обов\'язкове'),
     },
   });
 
@@ -157,7 +157,7 @@ const ProductModal = ({ product, onClose, onSubmit }) => {
     <Modal size="3xl" isOpen={isOpen} onClose={onClose}>
       <ModalContent>
         <ModalHeader className="flex flex-col gap-1">
-          {isNew ? 'New' : 'Update'} Product
+          {isNew ? 'Створення' : 'Редагування'} продукту
         </ModalHeader>
         <ModalBody>
           <form
@@ -166,13 +166,8 @@ const ProductModal = ({ product, onClose, onSubmit }) => {
             onSubmit={onFormSubmit}
           >
             <div className="flex flex-col gap-4 w-2/4">
-              <CInput form={form} id="header" name="Header" isRequired />
-              <CInput
-                form={form}
-                id="description"
-                name="Description"
-                isRequired
-              />
+              <CInput form={form} id="header" name="Назва" isRequired />
+              <CInput form={form} id="description" name="Опис" isRequired />
 
               <Row>
                 <CInput
@@ -181,7 +176,7 @@ const ProductModal = ({ product, onClose, onSubmit }) => {
                   type="number"
                   step="0.1"
                   id="measurement"
-                  name="Measurement"
+                  name="Міра"
                   isHalfWidth={true}
                   min={0}
                 />
@@ -189,7 +184,7 @@ const ProductModal = ({ product, onClose, onSubmit }) => {
                 <CSelect
                   form={form}
                   id="type_measurement"
-                  name="Measure Type"
+                  name="Тип міри"
                   items={MEASUREMENT_TYPES}
                 />
               </Row>
@@ -198,7 +193,7 @@ const ProductModal = ({ product, onClose, onSubmit }) => {
                 <CSelect
                   form={form}
                   id="type_product"
-                  name="Product type"
+                  name="Тип продукту"
                   items={PRODUCT_TYPES}
                 />
 
@@ -206,7 +201,7 @@ const ProductModal = ({ product, onClose, onSubmit }) => {
                   <CSelect
                     form={form}
                     id="type_juice"
-                    name="Juice type"
+                    name="Тип соку"
                     items={JUICE_TYPES}
                   />
                 )}
@@ -214,7 +209,7 @@ const ProductModal = ({ product, onClose, onSubmit }) => {
                   <CSelect
                     form={form}
                     id="type_vinegar"
-                    name="Vinegar type"
+                    name="Тип оцту"
                     items={VINEGAR_TYPES}
                   />
                 )}
@@ -222,7 +217,7 @@ const ProductModal = ({ product, onClose, onSubmit }) => {
                   <CSelect
                     form={form}
                     id="type_apple"
-                    name="Apple type"
+                    name="Тип яблука"
                     items={APPLE_TYPES}
                   />
                 )}
@@ -232,7 +227,7 @@ const ProductModal = ({ product, onClose, onSubmit }) => {
               <CSelect
                 form={form}
                 id="type_packaging"
-                name="Packaging type"
+                name="Тип пакування"
                 items={PACKAGIN_TYPES}
                 isHalfWidth={false}
               />
@@ -242,7 +237,7 @@ const ProductModal = ({ product, onClose, onSubmit }) => {
                   form={form}
                   type="number"
                   id="price"
-                  name="Price"
+                  name="Ціна"
                   endContent={<div className="text-xs">uah</div>}
                   className="w-2/3"
                   min={0}
@@ -258,7 +253,7 @@ const ProductModal = ({ product, onClose, onSubmit }) => {
                     form={form}
                     type="number"
                     id="price_discount"
-                    name="Discount"
+                    name="Знижка"
                     endContent={<div className="text-xs">%</div>}
                     max={100}
                     min={0}
@@ -301,10 +296,10 @@ const ProductModal = ({ product, onClose, onSubmit }) => {
         </ModalBody>
         <ModalFooter>
           <Button color="danger" variant="light" onClick={onClose}>
-            Close
+            Закрити
           </Button>
           <Button color="primary" onClick={onFormSubmit}>
-            {isNew ? 'Create' : 'Update'}
+            {isNew ? 'Додати' : 'Зберегти'}
           </Button>
         </ModalFooter>
       </ModalContent>

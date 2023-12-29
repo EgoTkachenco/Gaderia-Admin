@@ -32,14 +32,14 @@ export const RenderCell = ({
       return (
         <div className="flex items-center gap-4 ">
           {onUpdate && (
-            <Tooltip content="Update" color="secondary">
+            <Tooltip content="Редагувати" color="secondary">
               <button onClick={() => onUpdate(rowData)}>
                 <EditIcon size={20} fill="#979797" />
               </button>
             </Tooltip>
           )}
           {onDelete && (
-            <Tooltip content="Delete" color="danger">
+            <Tooltip content="Видалити" color="danger">
               <button onClick={() => onDelete(rowData.id)}>
                 <DeleteIcon size={20} fill="#FF0080" />
               </button>
@@ -144,11 +144,13 @@ const DetailsModal = ({ data, rowStyle }) => {
         className="underline font-bold cursor-pointer"
         onClick={() => setOpen(!open)}
       >
-        List
+        Список
       </span>
       <Modal size="5xl" isOpen={open} onClose={() => setOpen(false)}>
         <ModalContent>
-          <ModalHeader className="flex flex-col gap-1">Order List</ModalHeader>
+          <ModalHeader className="flex flex-col gap-1">
+            Список товарів
+          </ModalHeader>
           <ModalBody>
             <div className="flex flex-col gap-2" style={rowStyle}>
               <Table data={table_data} columns={model} />

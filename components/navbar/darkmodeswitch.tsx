@@ -9,7 +9,9 @@ export const DarkModeSwitch = () => {
       isSelected={theme === 'dark' ? true : false}
       onValueChange={(e) => setTheme(e ? 'dark' : 'light')}
     >
-      <div className="text-sm whitespace-nowrap">Theme {theme}</div>
+      <div className="text-sm whitespace-nowrap">
+        {theme === 'dark' ? 'Темна' : 'Світла'} тема
+      </div>
     </Switch>
   );
 };

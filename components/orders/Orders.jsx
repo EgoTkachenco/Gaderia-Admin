@@ -40,7 +40,9 @@ export const Orders = () => {
   return (
     <div className=" w-full flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-xl font-semibold whitespace-nowrap">All Orders</h3>
+        <h3 className="text-xl font-semibold whitespace-nowrap">
+          Всі замовлення
+        </h3>
         <Select
           style={{ width: 300, marginLeft: 'auto' }}
           isRequired
@@ -87,18 +89,18 @@ export const Orders = () => {
 
 const orderModel = [
   { name: 'ID', uid: 'id', type: 'text' },
-  { name: 'Order ID', uid: 'order_id', type: 'text', width: '150px' },
-  { name: 'User', uid: 'user', type: 'user', width: '150px' },
-  { name: 'List', uid: 'list', type: 'list' },
-  { name: 'Delivery', uid: 'delivery', type: 'delivery', width: '150px' },
-  { name: 'TTN', uid: 'ttn', type: 'text', width: '150px' },
+  { name: 'ID замовлення', uid: 'order_id', type: 'text', width: '150px' },
+  { name: 'Користувач', uid: 'user', type: 'user', width: '150px' },
+  { name: 'Товари', uid: 'list', type: 'list' },
+  { name: 'Доставна', uid: 'delivery', type: 'delivery', width: '150px' },
+  { name: 'ТТН', uid: 'ttn', type: 'text', width: '150px' },
   {
-    name: 'Payment method',
+    name: 'Метод оплати',
     uid: 'payment_method',
     type: 'text',
     width: '150px',
   },
-  { name: 'Amount', uid: 'price', type: 'price' },
+  { name: 'Вартість', uid: 'price', type: 'price' },
 
   { uid: 'actions', type: 'actions' },
 ];

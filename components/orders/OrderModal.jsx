@@ -25,7 +25,7 @@ const OrderModal = ({ order, onClose, onSubmit }) => {
     initialValues: { status: '' },
 
     validate: {
-      status: (value) => (value ? null : 'Field Required'),
+      status: (value) => (value ? null : "Поле обов'язкове"),
     },
   });
 
@@ -52,7 +52,9 @@ const OrderModal = ({ order, onClose, onSubmit }) => {
   return (
     <Modal size="3xl" isOpen={isOpen} onClose={onClose}>
       <ModalContent>
-        <ModalHeader className="flex flex-col gap-1">Update Order</ModalHeader>
+        <ModalHeader className="flex flex-col gap-1">
+          Редагування замовлення
+        </ModalHeader>
         <ModalBody>
           <form
             id="product-form"
@@ -60,11 +62,11 @@ const OrderModal = ({ order, onClose, onSubmit }) => {
             onSubmit={onFormSubmit}
           >
             <div className="flex flex-col gap-4 w-2/4">
-              <CInput form={form} id="ttn" name="TTN" />
+              <CInput form={form} id="ttn" name="ТТН" />
               <CSelect
                 form={form}
                 id="status"
-                name="Status"
+                name="Статус"
                 items={STATUSES}
                 isHalfWidth={false}
               />
@@ -73,10 +75,10 @@ const OrderModal = ({ order, onClose, onSubmit }) => {
         </ModalBody>
         <ModalFooter>
           <Button color="danger" variant="light" onClick={onClose}>
-            Close
+            Закрити
           </Button>
           <Button color="primary" onClick={onFormSubmit}>
-            Update
+            Зберегти
           </Button>
         </ModalFooter>
       </ModalContent>

@@ -16,7 +16,7 @@ const UserModal = ({ user, onClose, onSubmit }) => {
     initialValues: { full_name: '' },
 
     validate: {
-      full_name: (value) => (value ? null : 'Field Required'),
+      full_name: (value) => (value ? null : "Поле обов'язкове"),
     },
   });
 
@@ -43,7 +43,9 @@ const UserModal = ({ user, onClose, onSubmit }) => {
   return (
     <Modal size="3xl" isOpen={isOpen} onClose={onClose}>
       <ModalContent>
-        <ModalHeader className="flex flex-col gap-1">Update User</ModalHeader>
+        <ModalHeader className="flex flex-col gap-1">
+          Редагування користувача
+        </ModalHeader>
         <ModalBody>
           <form
             id="product-form"
@@ -51,16 +53,21 @@ const UserModal = ({ user, onClose, onSubmit }) => {
             onSubmit={onFormSubmit}
           >
             <div className="flex flex-col gap-4 w-2/4">
-              <CInput form={form} id="full_name" name="Full name" isRequired />
+              <CInput
+                form={form}
+                id="full_name"
+                name="Повне ім\'я"
+                isRequired
+              />
             </div>
           </form>
         </ModalBody>
         <ModalFooter>
           <Button color="danger" variant="light" onClick={onClose}>
-            Close
+            Закрити
           </Button>
           <Button color="primary" onClick={onFormSubmit}>
-            Update
+            Зберегти
           </Button>
         </ModalFooter>
       </ModalContent>

@@ -5,7 +5,7 @@ const orders = () => {
   return (
     <>
       <Head>
-        <title>Orders</title>
+        <title>Замовлення</title>
       </Head>
       <Orders />
     </>

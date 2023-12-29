@@ -31,7 +31,7 @@ export const Users = () => {
   return (
     <div className=" w-full flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-xl font-semibold">All Users</h3>
+        <h3 className="text-xl font-semibold">Всі Користувачі</h3>
       </div>
       <div className="w-full">
         {!isFetch && (
@@ -55,15 +55,15 @@ export const Users = () => {
 
 const userModel = [
   { name: 'ID', uid: 'id', type: 'text' },
-  { name: 'Company', uid: 'company', type: 'company', width: '150px' },
-  { name: 'User', uid: 'user', type: 'user', width: '250px' },
+  { name: 'Компанія', uid: 'company', type: 'company', width: '150px' },
+  { name: 'Користувач', uid: 'user', type: 'user', width: '250px' },
   {
-    name: 'Role',
+    name: 'Роль',
     uid: 'role',
     type: 'text',
     width: '150px',
   },
-  { name: 'Bank', uid: 'bank', type: 'bank' },
-  { name: 'Address', uid: 'address', type: 'full_address' },
+  { name: 'Банк', uid: 'bank', type: 'bank' },
+  { name: 'Адреса', uid: 'address', type: 'full_address' },
   { uid: 'actions', type: 'actions' },
 ];

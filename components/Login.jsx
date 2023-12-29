@@ -16,8 +16,8 @@ export const Login = () => {
     },
 
     validate: {
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-      password: (value) => (value ? null : 'Invalid password'),
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Невірний email'),
+      password: (value) => (value ? null : 'Невірний пароль'),
     },
   });
 
@@ -35,14 +35,16 @@ export const Login = () => {
   return (
     <div className="flex h-screen flex-col justify-center px-6 py-12 lg:px-8 items-center">
       <div className="bg-default-50 shadow-lg rounded-xl p-8 w-96">
-        <h3 className="text-center text-xl font-bold ">Gaderia Admin Panel</h3>
+        <h3 className="text-center text-xl font-bold ">
+          Адміністративна панель Gaderia
+        </h3>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-8" onSubmit={form.onSubmit(onSubmit)}>
             <Input
               name="email"
-              label="Email address"
-              placeholder="Enter your email"
+              label="Пошта"
+              placeholder="Введіть вашу пошту"
               {...form.getInputProps('email')}
               labelPlacement="outside"
               errorMessage={form.getInputProps('email').error}
@@ -51,15 +53,15 @@ export const Login = () => {
             <Input
               name="password"
               type="password"
-              label="Password"
-              placeholder="Enter your password"
+              label="Пароль"
+              placeholder="Введіть ваш пароль"
               {...form.getInputProps('password')}
               labelPlacement="outside"
               errorMessage={form.getInputProps('password').error}
             />
 
             <Button type="submit" color="primary" className="w-full">
-              Sign In
+              Увійти
             </Button>
           </form>
         </div>

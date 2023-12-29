@@ -5,7 +5,7 @@ const users = () => {
   return (
     <>
       <Head>
-        <title>Users</title>
+        <title>Користувачі</title>
       </Head>
       <Users />
     </>

@@ -61,7 +61,7 @@ export const NavbarWrapper = ({ children }) => {
             {/* <UserDropdown /> */}
             <DarkModeSwitch />
             <Button onClick={logout} color="danger">
-              Log Out
+              Вихід
             </Button>
           </NavbarContent>
         </NavbarContent>

@@ -55,9 +55,9 @@ export const Products = () => {
   return (
     <div className=" w-full flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-xl font-semibold">All Products</h3>
+        <h3 className="text-xl font-semibold">Всі продукти</h3>
         <Button color="primary" onClick={() => setActiveProduct({})}>
-          Create
+          Додати
         </Button>
       </div>
       <div className="w-full">
@@ -77,7 +77,7 @@ export const Products = () => {
             />
           </>
         )}
-        {isFetch && <div>Loading...</div>}
+        {isFetch && <div>Завантаження...</div>}
       </div>
       <ProductModal
         product={activeProduct}
@@ -90,22 +90,22 @@ export const Products = () => {
 
 export const productModel = [
   { name: 'ID', uid: 'id', type: 'text' },
-  { name: 'Picture', uid: 'picture', type: 'picture', width: '150px' },
-  { name: 'Header', uid: 'header', type: 'text', width: '250px' },
+  { name: 'Картинка', uid: 'picture', type: 'picture', width: '150px' },
+  { name: 'Назва', uid: 'header', type: 'text', width: '250px' },
   {
-    name: 'Description',
+    name: 'Опис',
     uid: 'description',
     type: 'long-text',
     width: '250px',
   },
-  { name: 'Count', uid: 'count', type: 'text' },
-  { name: 'Price', uid: 'price', type: 'text' },
-  { name: 'Discount', uid: 'price_discount', type: 'text' },
-  { name: 'Measurement', uid: 'measurement_label', type: 'text' },
-  { name: 'Type Product', uid: 'type_product', type: 'text' },
-  { name: 'Type Apple', uid: 'type_apple', type: 'text' },
-  { name: 'Type Juice', uid: 'type_juice', type: 'text' },
-  { name: 'Type Vinegar', uid: 'type_vinegar', type: 'text' },
-  { name: 'Type Packaging', uid: 'type_packaging', type: 'text' },
+  { name: 'Кількість', uid: 'count', type: 'text' },
+  { name: 'Ціна', uid: 'price', type: 'text' },
+  { name: 'Знижка', uid: 'price_discount', type: 'text' },
+  { name: 'Міра', uid: 'measurement_label', type: 'text' },
+  { name: 'Тип продукту', uid: 'type_product', type: 'text' },
+  { name: 'Тип яблука', uid: 'type_apple', type: 'text' },
+  { name: 'Тип соку', uid: 'type_juice', type: 'text' },
+  { name: 'Тип оцту', uid: 'type_vinegar', type: 'text' },
+  { name: 'Тип пакування', uid: 'type_packaging', type: 'text' },
   { uid: 'actions', type: 'actions' },
 ];

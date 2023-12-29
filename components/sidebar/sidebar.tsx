@@ -46,7 +46,7 @@ export const SidebarWrapper = () => {
               isActive={router.pathname === '/'}
               href="/"
             /> */}
-            <SidebarMenu title="Main Menu">
+            <SidebarMenu title="Меню">
               {/* <SidebarItem
                 isActive={router.pathname === '/accounts'}
                 title="Accounts"
@@ -70,25 +70,25 @@ export const SidebarWrapper = () => {
               /> */}
               <SidebarItem
                 isActive={router.pathname === '/products'}
-                title="Products"
+                title="Продукти"
                 icon={<ProductsIcon />}
                 href="products"
               />
               <SidebarItem
                 isActive={router.pathname === '/contacts'}
-                title="Contacts"
+                title="Контакти"
                 icon={<CustomersIcon />}
                 href="contacts"
               />
               <SidebarItem
                 isActive={router.pathname === '/orders'}
-                title="Orders"
+                title="Замовлення"
                 icon={<PaymentsIcon />}
                 href="orders"
               />
               <SidebarItem
                 isActive={router.pathname === '/users'}
-                title="Accounts"
+                title="Користувачі"
                 icon={<AccountsIcon />}
                 href="users"
               />
