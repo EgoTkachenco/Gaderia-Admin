@@ -29,7 +29,7 @@ export const Contacts = () => {
   return (
     <div className=" w-full flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-xl font-semibold">Зворотний зв'язок</h3>
+        <h3 className="text-xl font-semibold">Зворотний зв`язок</h3>
         <div>
           <Checkbox
             isSelected={params.is_view}

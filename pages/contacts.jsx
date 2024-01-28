@@ -5,7 +5,7 @@ const products = () => {
   return (
     <>
       <Head>
-        <title>Зворотний зв'язок</title>
+        <title>Зворотний зв`язок</title>
       </Head>
       <Contacts />
     </>
