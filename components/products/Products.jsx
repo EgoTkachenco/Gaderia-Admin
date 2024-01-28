@@ -89,14 +89,14 @@ export const Products = () => {
 };
 
 export const productModel = [
-  { name: 'ID', uid: 'id', type: 'text' },
-  { name: 'Картинка', uid: 'picture', type: 'picture', width: '150px' },
-  { name: 'Назва', uid: 'header', type: 'text', width: '250px' },
+  // { name: 'ID', uid: 'id', type: 'text' },
+  { name: 'Картинка', uid: 'picture', type: 'picture', width: '120px' },
+  { name: 'Назва', uid: 'header', type: 'text', width: '200px' },
   {
     name: 'Опис',
     uid: 'description',
     type: 'long-text',
-    width: '250px',
+    width: '220px',
   },
   { name: 'Кількість', uid: 'count', type: 'text' },
   { name: 'Ціна', uid: 'price', type: 'text' },

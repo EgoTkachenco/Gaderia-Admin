@@ -76,7 +76,7 @@ export const SidebarWrapper = () => {
               />
               <SidebarItem
                 isActive={router.pathname === '/contacts'}
-                title="Контакти"
+                title="Зворотний зв'язок"
                 icon={<CustomersIcon />}
                 href="contacts"
               />

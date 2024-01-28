@@ -11,7 +11,7 @@ import {
 } from '@nextui-org/react';
 import { Select, SelectItem } from '@nextui-org/select';
 import { useForm } from '@mantine/form';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const new_product = {
   header: '',
@@ -108,34 +108,28 @@ const ProductModal = ({ product, onClose, onSubmit }) => {
           ? null
           : "Поле обов'язкове",
       type_packaging: (value) => (value ? null : "Поле обов'язкове"),
-      // photo: (value) => (value ? null : 'Поле обов\'язкове'),
+      photo: (value) => (value || !isNew ? null : "Поле обов'язкове"),
     },
   });
 
-  const onFormSubmit = () => {
-    form.validate();
-    if (form.isValid()) {
-      let formData;
+  const onFormSubmit = form.onSubmit((values) => {
+    let formData = new FormData();
+    Object.keys(values).forEach((key) => {
+      if (values[key] !== '' && values[key] !== null)
+        formData.append(key, values[key]);
+    });
 
-      if (isNew) {
-        formData = new FormData(document.getElementById('product-form'));
-      } else {
-        formData = new FormData(document.getElementById('product-form'));
-        if (!form.values.photo) formData.delete('photo');
-        // formData = new FormData();
-        // formData.append('description', form.values.description);
-        // formData.append('price', form.values.price);
-      }
-
-      onSubmit(formData)
-        .then(() => {
-          onClose();
-        })
-        .catch((err) => {
-          form.setErrors(err.response?.data?.error);
-        });
-    }
-  };
+    onSubmit(formData)
+      .then(() => {
+        onClose();
+      })
+      .catch((err) => {
+        debugger;
+        form.setErrors(
+          err.response?.data?.error || { photo: err.response?.data?.data }
+        );
+      });
+  });
 
   useEffect(() => {
     if (isOpen) {
@@ -260,37 +254,13 @@ const ProductModal = ({ product, onClose, onSubmit }) => {
                   />
                 </div>
               </Row>
-              <Input
-                type="file"
-                {...getFieldProps('photo', 'Photo')}
-                onChange={() =>
-                  form.setFieldValue(
-                    'photo',
-                    document.getElementById('photo').files[0]
-                  )
-                }
-                // isInvalid={!!form.getInputProps('photo').error}
+              <FileInput
+                name={'photo'}
+                value={form.getInputProps('photo').value}
+                onChange={form.getInputProps('photo').onChange}
+                picture={product?.picture}
                 errorMessage={form.getInputProps('photo').error}
               />
-              <div>
-                {form.value?.photo ? (
-                  <Image
-                    src={URL.createObjectURL(form.value?.photo)}
-                    alt="Picture"
-                    width={200}
-                    height={200}
-                    style={{ objectFit: 'contain' }}
-                  />
-                ) : product?.picture ? (
-                  <Image
-                    src={product.picture}
-                    alt="Picture"
-                    width={200}
-                    height={200}
-                    style={{ objectFit: 'contain' }}
-                  />
-                ) : null}
-              </div>
             </div>
           </form>
         </ModalBody>
@@ -370,3 +340,69 @@ const formatProduct = (data) =>
     (acc, key) => ({ ...acc, [key]: data[key] || '' }),
     {}
   );
+
+const FileInput = ({ name, value, onChange, picture, errorMessage }) => {
+  const [isEdit, setIsEdit] = useState(!picture);
+
+  const render = () => {
+    if (isEdit)
+      return (
+        <input
+          id={name}
+          name={name}
+          type="file"
+          onChange={(e) => {
+            onChange(e.target.files[0]);
+            setIsEdit(false);
+          }}
+        />
+      );
+
+    if (value)
+      return (
+        <Image
+          src={URL.createObjectURL(value)}
+          alt="Picture"
+          width={200}
+          height={200}
+          style={{ objectFit: 'contain' }}
+        />
+      );
+
+    if (picture)
+      return (
+        <Image
+          src={picture}
+          alt="Picture"
+          width={200}
+          height={200}
+          style={{ objectFit: 'contain' }}
+        />
+      );
+
+    return;
+  };
+
+  return (
+    <div className="flex flex-col gap-4">
+      <label htmlFor="file">Картинка</label>
+      <div className="flex gap-4">
+        {render()}
+        {!isEdit && (
+          <Button
+            className="w-32"
+            onClick={() => {
+              onChange(null);
+              setIsEdit(true);
+            }}
+          >
+            Змінити
+          </Button>
+        )}
+      </div>
+      {errorMessage ? (
+        <div className="text-tiny text-danger">{errorMessage}</div>
+      ) : null}
+    </div>
+  );
+};
