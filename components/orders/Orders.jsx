@@ -76,7 +76,7 @@ export const Orders = () => {
             />
           </>
         )}
-        {isFetch && <div>Loading...</div>}
+        {isFetch && <div>Завантаження...</div>}
       </div>
       <OrderModal
         order={activeOrder}

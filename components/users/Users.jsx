@@ -42,7 +42,7 @@ export const Users = () => {
             onDelete={(id) => handleUserDelete(id)}
           />
         )}
-        {isFetch && <div>Loading...</div>}
+        {isFetch && <div>Завантаження...</div>}
       </div>
       <UserModal
         user={activeUser}

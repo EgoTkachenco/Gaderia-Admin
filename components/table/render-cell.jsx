@@ -57,7 +57,13 @@ export const RenderCell = ({
       return (
         <div className="flex flex-col gap-2" style={getWidthStyles()}>
           <span>{rowData.type_delivery}</span>
-          <span>{rowData.delivery_description || '---'}</span>
+          <span>
+            {rowData.delivery_description
+              ? rowData.delivery_description?.regionCity +
+                ', ' +
+                rowData.delivery_description?.description
+              : '---'}
+          </span>
         </div>
       );
     case 'list':

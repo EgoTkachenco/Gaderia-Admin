@@ -42,29 +42,37 @@ export const Contacts = () => {
         </div>
       </div>
       <div className="w-full">
-        <TableWrapper
-          columns={[
-            ...contactModel,
-            {
-              name: 'Actions',
-              uid: 'actions',
-              type: 'custom',
-              render: (data) =>
-                !data.is_view && (
-                  <Button size="sm" onClick={() => handleContactView(data.id)}>
-                    Set Viewed
-                  </Button>
-                ),
-            },
-          ]}
-          data={data}
-        />
-        <Pagination
-          isNext={isNext}
-          onNext={nextPage}
-          onPrev={prevPage}
-          isPrev={isPrev}
-        />
+        {!isFetch && (
+          <>
+            <TableWrapper
+              columns={[
+                ...contactModel,
+                {
+                  name: 'Actions',
+                  uid: 'actions',
+                  type: 'custom',
+                  render: (data) =>
+                    !data.is_view && (
+                      <Button
+                        size="sm"
+                        onClick={() => handleContactView(data.id)}
+                      >
+                        Set Viewed
+                      </Button>
+                    ),
+                },
+              ]}
+              data={data}
+            />
+            <Pagination
+              isNext={isNext}
+              onNext={nextPage}
+              onPrev={prevPage}
+              isPrev={isPrev}
+            />
+          </>
+        )}
+        {isFetch && <div>Завантаження...</div>}
       </div>
     </div>
   );
