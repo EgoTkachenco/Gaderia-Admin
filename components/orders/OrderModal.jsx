@@ -12,11 +12,10 @@ import { useForm } from '@mantine/form';
 import { useEffect } from 'react';
 
 export const STATUSES = [
-  { label: 'Select status', value: '' },
-  { label: 'Waiting', value: 'WAITING' },
-  { label: 'Work', value: 'WORK' },
-  { label: 'Canceled', value: 'CANCELED' },
-  { label: 'Completed', value: 'COMPLETED' },
+  { label: 'Очікування', value: 'WAITING' },
+  { label: 'Обробка', value: 'WORK' },
+  { label: 'Скасовано', value: 'CANCELED' },
+  { label: 'Виконано', value: 'COMPLETED' },
 ];
 
 const OrderModal = ({ order, onClose, onSubmit }) => {

@@ -19,7 +19,8 @@ export const Orders = () => {
     prevPage,
     isPrev,
   } = useTableAPIRequest(getOrders, {
-    status: 'CANCELED',
+    // status: 'CANCELED',
+    status: '',
   });
   const [activeOrder, setActiveOrder] = useState(null);
   const handleOrder = ({ status, ttn }) => {
@@ -46,7 +47,7 @@ export const Orders = () => {
         <Select
           style={{ width: 300, marginLeft: 'auto' }}
           isRequired
-          items={STATUSES}
+          items={[{ label: 'Всі', value: '' }, , ...STATUSES]}
           selectedKeys={[params.status]}
           onChange={(e) => {
             setParams({ ...params, status: e.target.value });
