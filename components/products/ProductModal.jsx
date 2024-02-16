@@ -38,6 +38,7 @@ const JUICE_TYPES = [
   { label: 'Carrot & Apple', value: 'CARROTAPPLE' },
   { label: 'Strawberry & Apple', value: 'STRAWBERRYAPPLE' },
   { label: 'Pear & Apple', value: 'PEARAPPLE' },
+  { label: 'Grape & Apple', value: 'APPLEGRAPE' },
 ];
 
 const VINEGAR_TYPES = [
