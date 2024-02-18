@@ -10,6 +10,7 @@ import {
 import useTableAPIRequest from '../hooks/useTableAPIRequest';
 import ProductModal from './ProductModal';
 import Pagination from '../Pagination';
+import { MEASUREMENT_TYPES } from '../../constants';
 
 export const Products = () => {
   const {
@@ -43,14 +44,17 @@ export const Products = () => {
     });
   };
 
-  const formatedData = useMemo(
-    () =>
-      data?.map((item) => ({
-        ...item,
-        measurement_label: item.measurement + ' ' + item.type_measurement,
-      })),
-    [data]
-  );
+  // const formatedData = useMemo(
+  //   () =>
+  //     data?.map((item) => ({
+  //       ...item,
+  //       measurement_label:
+  //         item.measurement +
+  //         ' ' +
+  //         (),
+  //     })),
+  //   [data]
+  // );
 
   return (
     <div className=" w-full flex flex-col gap-4">
@@ -65,7 +69,7 @@ export const Products = () => {
           <>
             <TableWrapper
               columns={productModel}
-              data={formatedData}
+              data={data}
               onUpdate={(item) => setActiveProduct(item)}
               onDelete={(id) => handleProductDelete(id)}
             />
@@ -98,10 +102,10 @@ export const productModel = [
     type: 'long-text',
     width: '220px',
   },
-  { name: 'Кількість', uid: 'count', type: 'text' },
+  { name: 'Кількість', uid: 'measurement', type: 'text' },
+  { name: 'Міра', uid: 'type_measurement', type: 'text' },
   { name: 'Ціна', uid: 'price', type: 'text' },
   { name: 'Знижка', uid: 'price_discount', type: 'text' },
-  { name: 'Міра', uid: 'measurement_label', type: 'text' },
   { name: 'Тип продукту', uid: 'type_product', type: 'text' },
   { name: 'Тип яблука', uid: 'type_apple', type: 'text' },
   { name: 'Тип соку', uid: 'type_juice', type: 'text' },

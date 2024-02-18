@@ -6,6 +6,7 @@ import useTableAPIRequest from '../hooks/useTableAPIRequest';
 import OrderModal, { STATUSES } from './OrderModal';
 import { Select, SelectItem } from '@nextui-org/select';
 import Pagination from '../Pagination';
+import { MEASUREMENT_TYPES } from '../../constants';
 
 export const Orders = () => {
   const {
@@ -28,15 +29,6 @@ export const Orders = () => {
       onRequest();
     });
   };
-
-  const formatedData = useMemo(
-    () =>
-      data?.map((item) => ({
-        ...item,
-        measurement_label: item.measurement + ' ' + item.type_measurement,
-      })),
-    [data]
-  );
 
   return (
     <div className=" w-full flex flex-col gap-4">
@@ -65,7 +57,7 @@ export const Orders = () => {
           <>
             <TableWrapper
               columns={orderModel}
-              data={formatedData}
+              data={data}
               onUpdate={(item) => setActiveOrder(item)}
             />
 

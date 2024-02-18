@@ -13,6 +13,15 @@ import { Select, SelectItem } from '@nextui-org/select';
 import { useForm } from '@mantine/form';
 import { useEffect, useState } from 'react';
 
+import {
+  PRODUCT_TYPES,
+  JUICE_TYPES,
+  VINEGAR_TYPES,
+  APPLE_TYPES,
+  PACKAGIN_TYPES,
+  MEASUREMENT_TYPES,
+} from '/constants';
+
 const new_product = {
   header: '',
   description: '',
@@ -24,53 +33,6 @@ const new_product = {
   price_discount: 0,
   photo: null,
 };
-
-const PRODUCT_TYPES = [
-  { label: 'Оберіть тип продукту', value: '' },
-  { label: 'Juice', value: 'JUICE' },
-  { label: 'Vinegar', value: 'VINEGAR' },
-  { label: 'Apple', value: 'APPLE' },
-];
-
-const JUICE_TYPES = [
-  { label: 'Оберіть тип соку', value: '' },
-  { label: 'Apple', value: 'APPLE' },
-  { label: 'Carrot & Apple', value: 'CARROTAPPLE' },
-  { label: 'Strawberry & Apple', value: 'STRAWBERRYAPPLE' },
-  { label: 'Pear & Apple', value: 'PEARAPPLE' },
-  { label: 'Grape & Apple', value: 'APPLEGRAPE' },
-];
-
-const VINEGAR_TYPES = [
-  { label: 'Оберіть тип оцту', value: '' },
-  { label: 'Filtered', value: 'FILTERED' },
-  { label: 'Unfiltered', value: 'UNFILTERED' },
-];
-
-const APPLE_TYPES = [
-  { label: 'Оберіть тип яблука', value: '' },
-  { label: 'Red Jonaprince', value: 'REDJONAPRINCE' },
-  { label: 'Modi', value: 'MODI' },
-  { label: 'Idared', value: 'IDARED' },
-  { label: 'Florina', value: 'FLORINA' },
-  { label: 'Fuji', value: 'FUJI' },
-  { label: 'Gala', value: 'GALA' },
-  { label: 'Golden Delicious', value: 'GOLDENDELICIOUS' },
-  { label: 'Red Chief', value: 'REDCHIEF' },
-  { label: 'Granny Smith', value: 'GRANNYSMITH' },
-];
-
-const PACKAGIN_TYPES = [
-  { label: 'Оберіть тип пакування', value: '' },
-  { label: 'Glass', value: 'GLASS' },
-  { label: 'Bag in box', value: 'BAGINBOX' },
-];
-
-const MEASUREMENT_TYPES = [
-  { label: 'Оберіть тип міри', value: '' },
-  { label: 'Kg', value: 'KG' },
-  { label: 'Liter', value: 'LITER' },
-];
 
 const ProductModal = ({ product, onClose, onSubmit }) => {
   const isOpen = !!product;
@@ -332,7 +294,7 @@ const getFieldProps = (id, name, isSelect = false, isHalfWidth = false) => ({
   name: id,
   className: isHalfWidth ? 'w-2/4' : '',
   label: name,
-  placeholder: `${isSelect ? 'Select' : 'Enter'} ${name.toLowerCase()}`,
+  placeholder: `${isSelect ? 'Оберіть' : 'Введіть'} ${name.toLowerCase()}`,
   labelPlacement: 'outside',
 });
 

@@ -12,6 +12,14 @@ import { EditIcon } from '../icons/table/edit-icon';
 import { productModel } from '../products/Products';
 import { TableWrapper as Table } from './table';
 import _ from 'lodash';
+import {
+  APPLE_TYPES,
+  JUICE_TYPES,
+  MEASUREMENT_TYPES,
+  PACKAGIN_TYPES,
+  PRODUCT_TYPES,
+  VINEGAR_TYPES,
+} from '../../constants';
 
 export const RenderCell = ({
   data,
@@ -121,9 +129,39 @@ export const RenderCell = ({
           {data}
         </div>
       );
+    // measurement_label
+    // type_product
+    // type_apple
+    // type_juice
+    // type_vinegar
+    // type_packaging
+
     case 'custom':
       return column.render(rowData);
+
     case 'text':
+      switch (column.uid) {
+        case 'type_measurement':
+          return (
+            MEASUREMENT_TYPES.find(({ value }) => value === data)?.label || ''
+          );
+
+        case 'type_product':
+          return PRODUCT_TYPES.find(({ value }) => value === data)?.label || '';
+
+        case 'type_apple':
+          return APPLE_TYPES.find(({ value }) => value === data)?.label || '';
+
+        case 'type_juice':
+          return JUICE_TYPES.find(({ value }) => value === data)?.label || '';
+
+        case 'type_vinegar':
+          return VINEGAR_TYPES.find(({ value }) => value === data)?.label || '';
+        case 'type_packaging':
+          return (
+            PACKAGIN_TYPES.find(({ value }) => value === data)?.label || ''
+          );
+      }
     default:
       return (
         <div className="line-clamp-1" style={getWidthStyles()}>
