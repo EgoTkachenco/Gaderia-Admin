@@ -9,8 +9,8 @@ import {
 } from '../../api';
 import useTableAPIRequest from '../hooks/useTableAPIRequest';
 import ProductModal from './ProductModal';
+import ProductsOrderModal from './ProductsOrderModal';
 import Pagination from '../Pagination';
-import { MEASUREMENT_TYPES } from '../../constants';
 
 export const Products = () => {
   const {
@@ -58,11 +58,16 @@ export const Products = () => {
 
   return (
     <div className=" w-full flex flex-col gap-4">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center flex-wrap">
         <h3 className="text-xl font-semibold">Всі продукти</h3>
-        <Button color="primary" onClick={() => setActiveProduct({})}>
+        <Button
+          color="primary"
+          onClick={() => setActiveProduct({})}
+          className="ml-auto mr-4"
+        >
           Додати
         </Button>
+        <ProductsOrderModal />
       </div>
       <div className="w-full">
         {!isFetch && (

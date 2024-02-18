@@ -16,3 +16,12 @@ body {
 input[type='file'] {
   height: auto;
 }
+
+.sortable-ghost.sortable-chosen {
+  color: red;
+}
+
+.sortable-chosen {
+  opacity: 50%;
+  color: white;
+}
