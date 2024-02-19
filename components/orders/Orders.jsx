@@ -3,10 +3,10 @@ import React, { useMemo, useState } from 'react';
 import { TableWrapper } from '../table/table';
 import { getOrders, updateOrder } from '../../api';
 import useTableAPIRequest from '../hooks/useTableAPIRequest';
-import OrderModal, { STATUSES } from './OrderModal';
+import OrderModal from './OrderModal';
 import { Select, SelectItem } from '@nextui-org/select';
 import Pagination from '../Pagination';
-import { MEASUREMENT_TYPES } from '../../constants';
+import { STATUSES } from '../../constants';
 
 export const Orders = () => {
   const {
@@ -39,7 +39,7 @@ export const Orders = () => {
         <Select
           style={{ width: 300, marginLeft: 'auto' }}
           isRequired
-          items={[{ label: 'Всі', value: '' }, , ...STATUSES]}
+          items={[{ label: 'Всі', value: '' }, ...STATUSES]}
           selectedKeys={[params.status]}
           onChange={(e) => {
             setParams({ ...params, status: e.target.value });
@@ -81,11 +81,11 @@ export const Orders = () => {
 };
 
 const orderModel = [
-  { name: 'ID', uid: 'id', type: 'text' },
-  { name: 'ID замовлення', uid: 'order_id', type: 'text', width: '150px' },
+  // { name: 'ID', uid: 'id', type: 'text' },
   { name: 'Користувач', uid: 'user', type: 'user', width: '150px' },
+  { name: 'Cтатус', uid: 'status', type: 'text' },
   { name: 'Товари', uid: 'list', type: 'list' },
-  { name: 'Доставна', uid: 'delivery', type: 'delivery', width: '150px' },
+  { name: 'Доставка', uid: 'delivery', type: 'delivery', width: '150px' },
   { name: 'ТТН', uid: 'ttn', type: 'text', width: '150px' },
   {
     name: 'Метод оплати',
@@ -93,7 +93,8 @@ const orderModel = [
     type: 'text',
     width: '150px',
   },
-  { name: 'Вартість', uid: 'price', type: 'price' },
+  { name: 'Вартість', uid: 'price', type: 'price', width: '100px' },
+  { name: 'ID замовлення', uid: 'order_id', type: 'text', width: '300px' },
 
   { uid: 'actions', type: 'actions' },
 ];

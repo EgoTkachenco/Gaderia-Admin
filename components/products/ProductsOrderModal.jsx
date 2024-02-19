@@ -7,7 +7,7 @@ import {
   Button,
 } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
-import { getCatalog } from '../../api';
+import { getCatalog, updateCatalog } from '../../api';
 import { ReactSortable } from 'react-sortablejs';
 
 const ProductsOrderModal = () => {
@@ -16,12 +16,23 @@ const ProductsOrderModal = () => {
   const [data, setData] = useState(null);
   const onClose = () => setIsOpen(false);
 
-  const onSubmit = () => {
-    const result = {};
+  const onSubmit = async () => {
+    const result = [];
     for (let i = 0; i < initialData.length; i++) {
-      if (initialData[i].id !== data[i].id) result[data[i].id] = i + 1;
+      if (initialData[i].id !== data[i].id) {
+        result.push({ id: data[i].id, order: i + 1 });
+      }
     }
-    console.log(result);
+
+    try {
+      for (let i = 0; i < result.length; i++) {
+        const { id, order } = result[i];
+        await updateCatalog({ catalog_id: id, id_sort: order });
+      }
+      onClose();
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   useEffect(() => {

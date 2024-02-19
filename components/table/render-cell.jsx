@@ -18,6 +18,7 @@ import {
   MEASUREMENT_TYPES,
   PACKAGIN_TYPES,
   PRODUCT_TYPES,
+  STATUSES,
   VINEGAR_TYPES,
 } from '../../constants';
 
@@ -66,11 +67,9 @@ export const RenderCell = ({
         <div className="flex flex-col gap-2" style={getWidthStyles()}>
           <span>{rowData.type_delivery}</span>
           <span>
-            {rowData.delivery_description
-              ? rowData.delivery_description?.regionCity +
-                ', ' +
-                rowData.delivery_description?.description
-              : '---'}
+            {rowData?.delivery_description?.nameUkr ||
+              rowData?.delivery_description?.Description ||
+              '---'}
           </span>
         </div>
       );
@@ -129,12 +128,6 @@ export const RenderCell = ({
           {data}
         </div>
       );
-    // measurement_label
-    // type_product
-    // type_apple
-    // type_juice
-    // type_vinegar
-    // type_packaging
 
     case 'custom':
       return column.render(rowData);
@@ -161,6 +154,8 @@ export const RenderCell = ({
           return (
             PACKAGIN_TYPES.find(({ value }) => value === data)?.label || ''
           );
+        case 'status':
+          return STATUSES.find(({ value }) => value === data)?.label || '';
       }
     default:
       return (
@@ -181,14 +176,13 @@ const DetailsModal = ({ data, rowStyle }) => {
       item.model_catalog.type_measurement,
   }));
   const model = _.cloneDeep(productModel);
-  model[1].width = 50;
   return (
     <>
       <span
         className="underline font-bold cursor-pointer"
         onClick={() => setOpen(!open)}
       >
-        Список
+        {table_data.length} шт.
       </span>
       <Modal size="5xl" isOpen={open} onClose={() => setOpen(false)}>
         <ModalContent>

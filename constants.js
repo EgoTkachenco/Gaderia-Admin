@@ -44,3 +44,10 @@ export const MEASUREMENT_TYPES = [
   { label: 'Кілограми', value: 'KG' },
   { label: 'Літри', value: 'LITER' },
 ];
+
+export const STATUSES = [
+  { label: 'Очікування', value: 'WAITING' },
+  { label: 'Обробка', value: 'WORK' },
+  { label: 'Скасовано', value: 'CANCELED' },
+  { label: 'Виконано', value: 'COMPLETED' },
+];

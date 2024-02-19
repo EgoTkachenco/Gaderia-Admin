@@ -10,13 +10,7 @@ import {
 import { Select, SelectItem } from '@nextui-org/select';
 import { useForm } from '@mantine/form';
 import { useEffect } from 'react';
-
-export const STATUSES = [
-  { label: 'Очікування', value: 'WAITING' },
-  { label: 'Обробка', value: 'WORK' },
-  { label: 'Скасовано', value: 'CANCELED' },
-  { label: 'Виконано', value: 'COMPLETED' },
-];
+import { STATUSES } from '../../constants';
 
 const OrderModal = ({ order, onClose, onSubmit }) => {
   const isOpen = !!order;
