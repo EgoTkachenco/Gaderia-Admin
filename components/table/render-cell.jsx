@@ -174,15 +174,23 @@ const DetailsModal = ({ data, rowStyle }) => {
       item.model_catalog.measurement +
       ' ' +
       item.model_catalog.type_measurement,
+
+    count: item.count,
   }));
-  const model = _.cloneDeep(productModel);
+  let model = _.cloneDeep(productModel);
+  model = [
+    ...model.slice(0, 2),
+    { name: 'Кількість', uid: 'count', type: 'text' },
+    ...model.slice(2),
+  ];
+  console.log(table_data);
   return (
     <>
       <span
         className="underline font-bold cursor-pointer"
         onClick={() => setOpen(!open)}
       >
-        {table_data.length} шт.
+        Cписок
       </span>
       <Modal size="5xl" isOpen={open} onClose={() => setOpen(false)}>
         <ModalContent>
